@@ -41,7 +41,7 @@
             <div class="icon">
                 <i class="ion ion-star"></i>
             </div>
-            <a href="{{ route('admin.cars.index', ['featured' => true]) }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.cars.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->
@@ -71,7 +71,7 @@
             <div class="icon">
                 <i class="ion ion-person"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.users.index') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <!-- ./col -->

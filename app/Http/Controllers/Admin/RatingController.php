@@ -15,7 +15,8 @@ class RatingController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Rating::with('car', 'user')->get();
+        return view('admin.reviews.index', compact('reviews'));
     }
 
     /**
@@ -57,21 +58,6 @@ class RatingController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

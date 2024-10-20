@@ -10,6 +10,11 @@ class Lease extends Model
     use HasFactory;
     protected $guarded = [];
 
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
+
     const STATUS_PENDING = 'pending';
     const STATUS_CONFIRMED = 'confirmed';
     const STATUS_COMPLETED = 'completed';
@@ -53,5 +58,10 @@ class Lease extends Model
     public function scopeCompleted($query)
     {
         return $query->where('end_date', '<', now());
+    }
+
+    public function getFormatedTotalPriceAttribute()
+    {
+        return '₦' . ($this->total_price ? number_format($this->total_price, 2) : '0.00');
     }
 }

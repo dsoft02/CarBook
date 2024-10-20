@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\CarListingController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\Admin\UserController As AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,19 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('bookings/{id}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
     Route::post('bookings/{id}/complete', [BookingController::class, 'complete'])->name('bookings.complete');
 
+    //Contact routes
+    Route::get('contacts', [AdminController::class, 'contact'])->name('contacts');
+
+    //Users route
+    Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [AdminUserController::class, 'create'])->name('users.create');
+    Route::post('users', [AdminUserController::class, 'store'])->name('users.store');
+    Route::get('users/edit/{id}', [AdminUserController::class, 'edit'])->name('users.edit');
+    Route::put('users/update/{id}', [AdminUserController::class, 'update'])->name('users.update');
+    Route::delete('users/delete/{id}', [AdminUserController::class, 'destroy'])->name('users.destroy');
+    Route::post('users/{user}/deactivate', [AdminUserController::class, 'deactivate'])->name('users.deactivate');
+    Route::post('users/{user}/reactivate', [AdminUserController::class, 'reactivate'])->name('users.reactivate');
+
 });
 
 // User routes (customers)
@@ -100,5 +114,11 @@ Route::get('/cars/{id}', [CarListingController::class, 'show'])->name('cars.show
 Route::post('/cars/{car}/ratings', [RatingController::class, 'store'])->name('ratings.store');
 Route::get('/check-car-availability', [CarListingController::class, 'checkAvailability']);
 
+Route::get('/logout', function () {
+    auth()->logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('applogout');
 
 require __DIR__.'/auth.php';

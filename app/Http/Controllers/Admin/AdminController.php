@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\Car;
 use App\Models\Lease;
 use App\Models\User;
+use App\Models\Contact;
 
 
 class AdminController extends Controller
@@ -90,5 +91,11 @@ class AdminController extends Controller
 
         // Redirect back with a success message
         return back()->with('success', 'Password updated successfully.');
+    }
+
+    public function contact()
+    {
+        $contacts = Contact::all();
+        return view('admin.contact', compact('contacts'));
     }
 }

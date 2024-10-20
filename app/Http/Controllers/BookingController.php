@@ -94,7 +94,9 @@ class BookingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $booking = Lease::findOrFail($id);
+
+        return view('admin.bookings.show', compact('booking'));
     }
 
     /**

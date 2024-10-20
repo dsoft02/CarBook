@@ -32,66 +32,23 @@
                     <table id="list-table" class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Subject</th>
                             <th>Message</th>
                             <th>Date</th>
-                            <th>Action</th>
-                            
-                            <th>#</th>
-                            <th>User</th>
-                            <th>Car</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Total Price</th>
-                            <th>Status</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($bookings as $booking)
+                        @foreach($contacts as $contact)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $booking->user->name }}</td>
-                            <td>{{ $booking->car->name }}</td>
-                            <td>{{ $booking->start_date }}</td>
-                            <td>{{ $booking->end_date }}</td>
-                            <td>₦{{ number_format($booking->total_price, 2) }}</td>
-                            <td>{!! getBookingStatusLabel($booking->status) !!}</td>
-                            <td>
-                                <div style="display: flex; align-items: center;">
-									<!-- View Button -->
-                                    <a href="{{ route('admin.bookings.show', $booking->id) }}"
-                                       class="btn btn-primary btn-sm" title="View Booking">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-
-                                    <!-- Cancel Button -->
-                                    @if($booking->status !== 'completed' && $booking->status !== 'canceled')
-                                    <form action="{{ route('admin.bookings.cancel', $booking->id) }}" method="POST"
-                                          onsubmit="return confirm('Are you sure you want to cancel this booking?');"
-                                          class="mr-2" style="margin-left: 5px;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Cancel Booking">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </form>
-                                    @endif
-
-                                    <!-- Mark as Complete Button -->
-                                    @if($booking->status !== 'completed' && $booking->status !== 'canceled')
-                                    <form action="{{ route('admin.bookings.complete', $booking->id) }}" method="POST"
-                                          onsubmit="return confirm('Are you sure you want to mark this booking as complete?');"
-                                          class="mr-2" style="margin-left: 5px;">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success btn-sm" title="Mark as Complete">
-                                            <i class="fa fa-check"></i>
-                                        </button>
-                                    </form>
-                                    @endif
-                                </div>
-                            </td>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->email }}</td>
+                            <td>{{ $contact->subject ?? 'N/A' }}</td>
+                            <td>{{ Str::limit($contact->message, 50) }}</td>
+                            <td>{{ $contact->created_at->format('Y-m-d') }}</td>
                         </tr>
                         @endforeach
                         </tbody>
