@@ -85,7 +85,7 @@
                     <div class="btn__grp">
                          @auth
                             <!-- Redirect authenticated users to the booking page -->
-                            <a href="{{ route('booking.create', $car->id) }}" class="btn btn-lg btn-primary">Book Your Ride</a>
+                            <a href="{{ route('user.booking.create', $car->id) }}" class="btn btn-lg btn-primary">Book Your Ride</a>
                         @else
                             <!-- Redirect unauthenticated users to the login page -->
                             <a href="{{ route('login') }}" class="btn btn-lg btn-primary">Book Your Ride</a>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('user.layouts.app')
 
 @php
 $pageTitle = 'My Profile'
@@ -11,7 +11,7 @@ $pageTitle = 'My Profile'
         Profile
     </h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
+        <li><a href="{{ route('user.dashboard') }}"><i class="fa fa-home"></i> Dashboard</a></li>
         <li class="active">Edit Profile</li>
     </ol>
 </section>
@@ -24,25 +24,25 @@ $pageTitle = 'My Profile'
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ $admin->profile_picture_url }}"
+                    <img class="profile-user-img img-responsive img-circle" src="{{ $user->profile_picture_url }}"
                          alt="User profile picture">
 
-                    <h3 class="profile-username text-center">{{ ucwords($admin->name) }}</h3>
+                    <h3 class="profile-username text-center">{{ ucwords($user->name) }}</h3>
 
-                    <p class="text-muted text-center">{{ strtolower($admin->role) }}</p>
+                    <p class="text-muted text-center">{{ strtolower($user->role) }}</p>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Name</b> <a class="pull-right">{{ ucwords($admin->name) }}</a>
+                            <b>Name</b> <a class="pull-right">{{ ucwords($user->name) }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Role</b> <a class="pull-right">{{ ucfirst($admin->role) }}</a>
+                            <b>Role</b> <a class="pull-right">{{ ucfirst($user->role) }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Email</b> <a class="pull-right">{{ strtolower($admin->email) }}</a>
+                            <b>Email</b> <a class="pull-right">{{ strtolower($user->email) }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Phone</b> <a class="pull-right">{{ $admin->phone }}</a>
+                            <b>Phone</b> <a class="pull-right">{{ $user->phone }}</a>
                         </li>
                     </ul>
                 </div>
@@ -59,39 +59,39 @@ $pageTitle = 'My Profile'
                 </ul>
                 <div class="tab-content pad-box">
                     <div class="active tab-pane" id="profile">
-                        <form id="profileForm" method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
+                        <form id="profileForm" method="POST" action="{{ route('user.profile.update') }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group @error('name') has-error @enderror">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Full Name" value="{{ old('name', $admin->name) }}">
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Full Name" value="{{ old('name', $user->name) }}">
                                 @error('name')
                                     <span class="help-block">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group @error('email') has-error @enderror">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="email@sample.com" value="{{ old('email',$admin->email) }}" readonly>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="email@sample.com" value="{{ old('email',$user->email) }}" readonly>
                                 @error('email')
                                     <span class="help-block">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group @error('phone') has-error @enderror">
                                 <label for="phone">Phone</label>
-                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone" value="{{ old('phone', $admin->phone) }}">
+                                <input type="text" id="phone" name="phone" class="form-control" placeholder="Phone" value="{{ old('phone', $user->phone) }}">
                                 @error('phone')
                                     <span class="help-block">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group @error('address') has-error @enderror">
                                 <label for="address">Address</label>
-                                <textarea class="form-control" id="address" name="address" placeholder="Address">{{ old('address', $admin->address) }}</textarea>
+                                <textarea class="form-control" id="address" name="address" placeholder="Address">{{ old('address', $user->address) }}</textarea>
                                 @error('address')
                                     <span class="help-block">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group @error('profile_picture') has-error @enderror">
-                                <label for="inputSkills">Picture</label>
+                                <label for="profile_picture">Picture</label>
                                 <input type="file" class="form-control" id="profile_picture" name="profile_picture">
                                 <small>The file size should not be more than 5MB</small>
                                 @error('profile_picture')
@@ -105,7 +105,7 @@ $pageTitle = 'My Profile'
                     </div>
                     <!-- /.tab-pane -->
                     <div class="tab-pane" id="password">
-                        <form id="passwordForm" method="POST" action="{{ route('admin.profile.password') }}">
+                        <form id="passwordForm" method="POST" action="{{ route('user.profile.password') }}">
                             @csrf
                             @method('PUT')
                             <div class="form-group @error('current_password') has-error @enderror">

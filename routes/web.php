@@ -79,6 +79,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     //Contact routes
     Route::get('contacts', [AdminController::class, 'contact'])->name('contacts');
+    Route::get('contacts/{id}', [AdminController::class, 'showContact'])->name('contacts.view');
+    Route::delete('contacts/{id}', [AdminController::class, 'destroyContact'])->name('contacts.destroy');
 
     //Users route
     Route::get('users', [AdminUserController::class, 'index'])->name('users.index');
@@ -93,15 +95,20 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 // User routes (customers)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
-
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
+    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+    Route::put('profile/password', [UserController::class, 'updatePassword'])->name('profile.password');
 
     Route::get('/booking/{car}', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+
+    Route::get('contacts', [UserController::class, 'contact'])->name('contacts');
+    Route::get('contacts/create', [UserController::class, 'createContact'])->name('contacts.create');
+    Route::post('contacts', [UserController::class, 'storeContact'])->name('contacts.store');
+    Route::get('contacts/{id}', [UserController::class, 'showContact'])->name('contacts.view');
+    Route::delete('contacts/{id}', [UserController::class, 'destroyContact'])->name('contacts.destroy');
 
 });
 

@@ -96,6 +96,19 @@ class AdminController extends Controller
     public function contact()
     {
         $contacts = Contact::all();
-        return view('admin.contact', compact('contacts'));
+        return view('admin.contacts.index', compact('contacts'));
+    }
+
+    public function showContact($id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('admin.contacts.show', compact('contact'));
+    }
+
+    public function destroyContact($id)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->delete();
+        return redirect()->route('admin.contacts')->with('success', 'Contact message deleted successfully.');
     }
 }

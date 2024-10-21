@@ -59,7 +59,7 @@ class BookingController extends Controller
         $paymentVerification = $this->verifyPayment($request->trx);
 
         if (!$paymentVerification['status'] || $paymentVerification['data']['status'] !== 'success') {
-            return redirect()->route('booking.create', $request->car_id)
+            return redirect()->route('user.booking.create', $request->car_id)
                              ->with('error', 'Payment verification failed. Please try again.');
         }
 

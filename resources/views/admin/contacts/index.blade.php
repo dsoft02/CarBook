@@ -38,6 +38,7 @@
                             <th>Subject</th>
                             <th>Message</th>
                             <th>Date</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,8 +48,21 @@
                             <td>{{ $contact->name }}</td>
                             <td>{{ $contact->email }}</td>
                             <td>{{ $contact->subject ?? 'N/A' }}</td>
-                            <td>{{ Str::limit($contact->message, 50) }}</td>
+                            <td>{!! Str::limit($contact->message, 50) !!}</td>
                             <td>{{ $contact->created_at->format('Y-m-d') }}</td>
+                            <td>
+                                <a href="{{ route('admin.contacts.view', $contact->id) }}" class="btn btn-info btn-sm"><i
+                                        class="fa fa-eye"></i> View</a>
+                                <form action="{{ route('admin.contacts.destroy', $contact->id) }}" method="POST"
+                                      style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete this message?');">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

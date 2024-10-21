@@ -83,7 +83,7 @@ desired effect
       <header class="main-header">
 
             <!-- Logo -->
-            <a href="{{ route('home') }}" class="logo">
+            <a href="{{ route('user.dashboard') }}" class="logo">
                   <!-- mini logo for sidebar mini 50x50 pixels -->
                   <span class="logo-mini"><b>A</b>LT</span>
                   <!-- logo for regular state and mobile devices -->
@@ -102,41 +102,8 @@ desired effect
                               <li>
                                     <a href="{{ route('home') }}" title="Visit Website" target="_blank"><i class="fa fa-globe"></i></a>
                               </li>
-                              <!-- Messages: style can be found in dropdown.less-->
-                              <li class="dropdown messages-menu">
-                                    <!-- Menu toggle button -->
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                          <i class="fa fa-envelope-o"></i>
-                                          <span class="label label-success">4</span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                          <li class="header">You have 4 messages</li>
-                                          <li>
-                                                <!-- inner menu: contains the messages -->
-                                                <ul class="menu">
-                                                      <li><!-- start message -->
-                                                            <a href="#">
-                                                                  <div class="pull-left">
-                                                                        <!-- User Image -->
-                                                                        <img src="{{ asset('backend/img/user2-160x160.jpg') }}"
-
-                                                     class="img-circle" alt="User Image">
-                                                                  </div>
-                                                                  <!-- Message title and timestamp -->
-                                                                  <h4>
-                                                                        Support Team
-                                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                                  </h4>
-                                                                  <!-- The message -->
-                                                                  <p>Why not buy a new awesome theme?</p>
-                                                            </a>
-                                                      </li>
-                                                      <!-- end message -->
-                                                </ul>
-                                                <!-- /.menu -->
-                                          </li>
-                                          <li class="footer"><a href="#">See All Messages</a></li>
-                                    </ul>
+                              <li>
+                                    <a href="{{ route('user.contacts') }}" title="Messages"><i class="fa fa-envelope-o"></i></a>
                               </li>
                               <!-- /.messages-menu -->
                               <!-- User Account Menu -->
@@ -161,7 +128,7 @@ desired effect
                                           <!-- Menu Footer-->
                                           <li class="user-footer">
                                                 <div class="pull-left">
-                                                      <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
+                                                      <a href="{{ route('user.profile') }}" class="btn btn-default btn-flat">Profile</a>
                                                 </div>
                                                 <div class="pull-right">
                                                     <!-- Authentication -->
@@ -184,7 +151,7 @@ desired effect
             </nav>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
-      @include('admin.partials.sidebar')
+      @include('user.partials.sidebar')
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -193,7 +160,7 @@ desired effect
       <!-- /.content-wrapper -->
 
       <!-- Main Footer -->
-      @include('admin.partials.footer')
+      @include('user.partials.footer')
 
 </div>
 <!-- ./wrapper -->

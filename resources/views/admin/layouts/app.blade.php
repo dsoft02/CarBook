@@ -103,7 +103,7 @@ desired effect
                                     <a href="{{ route('home') }}" title="Visit Website" target="_blank"><i class="fa fa-globe"></i></a>
                               </li>
                               <li>
-                                    <a href="{{ route('admin.contacts') }}" title="Visit Website" target="_blank"><i class="fa fa-envelope-o"></i></a>
+                                    <a href="{{ route('admin.contacts') }}" title="Messages"><i class="fa fa-envelope-o"></i></a>
                               </li>
                               <!-- /.messages-menu -->
                               <!-- User Account Menu -->

@@ -87,7 +87,7 @@
                                 @enderror
                             </div>
                             <div class="form-group @error('profile_picture') has-error @enderror">
-                                <label for="inputSkills">Picture</label>
+                                <label for="profile_picture">Picture</label>
                                 <input type="file" class="form-control" id="profile_picture" name="profile_picture">
                                 <small>The file size should not be more than 5MB</small>
                                 @error('profile_picture')

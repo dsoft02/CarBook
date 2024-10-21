@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('user.layouts.app')
     @php
-        $pageTitle = 'Admin Dashboard';
+        $pageTitle = 'User Dashboard';
     @endphp
