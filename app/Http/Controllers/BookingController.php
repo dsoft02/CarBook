@@ -15,31 +15,39 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Lease::all();
-        $pageTitle = 'All Bookings';
-        return view('admin.bookings.index', compact('bookings', 'pageTitle'));
+        // Fetch bookings for the authenticated user
+        $bookings = Lease::where('user_id', auth()->id())->get();
+        $pageTitle = 'My Bookings';
+        return view('user.bookings.index', compact('bookings', 'pageTitle'));
     }
 
     public function upcoming()
     {
         $pageTitle = 'Upcoming Bookings';
-        $upcomingBookings = Lease::where('start_date', '>', now())->get();
-        return view('admin.bookings.upcoming', compact('upcomingBookings', 'pageTitle'));
+        // Fetch upcoming bookings for the authenticated user
+        $upcomingBookings = Lease::where('user_id', auth()->id())
+            ->where('start_date', '>', now())
+            ->get();
+        return view('user.bookings.upcoming', compact('upcomingBookings', 'pageTitle'));
     }
 
     public function completed()
     {
         $pageTitle = 'Completed Bookings';
-        $completedBookings = Lease::where('status', 'completed')->get();
-        return view('admin.bookings.completed', compact('completedBookings', 'pageTitle'));
+        // Fetch completed bookings for the authenticated user
+        $completedBookings = Lease::where('user_id', auth()->id())
+            ->where('status', 'completed')
+            ->get();
+        return view('user.bookings.completed', compact('completedBookings', 'pageTitle'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create(Car $car)
     {
-        return view('car.booking', compact('car'));
+        return view('user.bookings.create', compact('car'));
     }
 
     /**
@@ -74,7 +82,7 @@ class BookingController extends Controller
             'status' => 'confirmed',
         ]);
 
-        return redirect()->route('booking.create', $request->car_id)
+        return redirect()->route('user.booking.create', $request->car_id)
                          ->with('success', 'Booking confirmed successfully!');
     }
 
@@ -96,7 +104,7 @@ class BookingController extends Controller
     {
         $booking = Lease::findOrFail($id);
 
-        return view('admin.bookings.show', compact('booking'));
+        return view('user.bookings.show', compact('booking'));
     }
 
     /**

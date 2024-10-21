@@ -58,7 +58,7 @@
             <div class="col-md-6">
                 <div class="booking-form">
                     <h3 class="font-weight-bold">Booking Form</h3>
-                    <form id="booking-form" action="{{ route('booking.store') }}" method="POST">
+                    <form id="booking-form" action="{{ route('user.booking.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="car_id" value="{{ $car->id }}">
                         <input type="hidden" name="trx" id="trx">

@@ -15,11 +15,29 @@ use App\Models\Contact;
 
 class UserController extends Controller
 {
-    public function dashboard(){
-        return view('user.dashboard');
+    public function dashboard()
+    {
+        $totalBookings = Lease::where('user_id', auth()->id())->count();
+        $completedBookings = Lease::where('user_id', auth()->id())->where('status', 'completed')->count();
+        $upcomingBookings = Lease::where('user_id', auth()->id())->where('status', 'upcoming')->count();
+        $canceledBookings = Lease::where('user_id', auth()->id())->where('status', 'canceled')->count();
+
+        $recentBookings = Lease::where('user_id', auth()->id())
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $featuredCarsList = Car::where('is_featured', 1)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('user.dashboard', compact('totalBookings', 'completedBookings', 'upcomingBookings', 'canceledBookings', 'recentBookings', 'featuredCarsList'
+        ));
     }
 
-    public function profile(){
+    public function profile()
+    {
         $user = Auth::user();
         $pageTitle = 'My Profile';
         return view('user.profile', compact('user', 'pageTitle'));
@@ -57,7 +75,6 @@ class UserController extends Controller
     }
 
 
-
     public function updatePassword(Request $request)
     {
         // Validate the form data
@@ -91,7 +108,8 @@ class UserController extends Controller
         return view('user.contacts.index', compact('contacts'));
     }
 
-    public function createContact(){
+    public function createContact()
+    {
         return view('user.contacts.create');
     }
 

@@ -12,8 +12,9 @@ use App\Http\Controllers\Admin\SeatTypeController;
 use App\Http\Controllers\Admin\RatingController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\CarListingController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingController As AdminBookingController;
 use App\Http\Controllers\Admin\UserController As AdminUserController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,12 +71,12 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('reviews/delete/{id}', [RatingController::class, 'destroy'])->name('reviews.destroy');
 
     //Bookings routes
-    Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
-    Route::get('bookings/upcoming', [BookingController::class, 'upcoming'])->name('bookings.upcoming');
-    Route::get('bookings/completed', [BookingController::class, 'completed'])->name('bookings.completed');
-    Route::get('bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
-    Route::post('bookings/{id}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
-    Route::post('bookings/{id}/complete', [BookingController::class, 'complete'])->name('bookings.complete');
+    Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
+    Route::get('bookings/upcoming', [AdminBookingController::class, 'upcoming'])->name('bookings.upcoming');
+    Route::get('bookings/completed', [AdminBookingController::class, 'completed'])->name('bookings.completed');
+    Route::get('bookings/{id}', [AdminBookingController::class, 'show'])->name('bookings.show');
+    Route::post('bookings/{id}/cancel', [AdminBookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::post('bookings/{id}/complete', [AdminBookingController::class, 'complete'])->name('bookings.complete');
 
     //Contact routes
     Route::get('contacts', [AdminController::class, 'contact'])->name('contacts');
@@ -96,13 +97,20 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
 // User routes (customers)
 Route::middleware(['auth'])->prefix('user')->name('user.')->group(function () {
-    Route::get('/user/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
     Route::put('profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [UserController::class, 'updatePassword'])->name('profile.password');
 
+    //Booking Routes
+    Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/booking/{car}', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('bookings/upcoming', [BookingController::class, 'upcoming'])->name('bookings.upcoming');
+    Route::get('bookings/completed', [BookingController::class, 'completed'])->name('bookings.completed');
+    Route::get('bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
+    Route::post('bookings/{id}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
+    Route::post('bookings/{id}/complete', [BookingController::class, 'complete'])->name('bookings.complete');
 
     Route::get('contacts', [UserController::class, 'contact'])->name('contacts');
     Route::get('contacts/create', [UserController::class, 'createContact'])->name('contacts.create');

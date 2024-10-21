@@ -15,8 +15,8 @@
             <li class="{{ isActiveRoute('user.dashboard') }}">
                 <a href="{{ route('user.dashboard') }}"><i class="fa fa-home"></i> <span>Dashboard</span></a>
             </li>
-            <li class="{{ isActiveRoute('user.bookings') }}">
-                <a href="#"><i class="fa fa-calendar"></i> <span>My Bookings</span></a>
+            <li class="{{ isActiveRoute('user.bookings.index') }}">
+                <a href="{{ route('user.bookings.index') }}"><i class="fa fa-calendar"></i> <span>My Bookings</span></a>
             </li>
             <li class="{{ isActiveRoute('user.profile') }}">
                 <a href="{{ route('user.profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a>
