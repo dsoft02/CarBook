@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\carbook\resources\views/car/booking.blade.php ENDPATH**/ ?>
