@@ -6,8 +6,6 @@
   <title>{{ getPageTitle($pageTitle ?? '') }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{ asset('backend/plugins/bootstrap/dist/css/bootstrap.min.css') }}">
