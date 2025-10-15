@@ -77,10 +77,14 @@
     			<div class="col-md-12">
     				<div class="carousel-car owl-carousel">
                         @foreach ($featuredCars as $car)
+                    @php
+    $images = json_decode($car->images, true);
+    $imageUrl = !empty($images) ? asset('storage/' . $images[0]) : asset('path-to-default-image.jpg');
+@endphp
         					<div class="item">
         						<div class="car-wrap rounded ftco-animate">
                                     <a href="{{ route('cars.show', $car->id) }}">
-    		    					<div class="img rounded d-flex align-items-end" style="background-image: url('{{ asset('storage/' . json_decode($car->images)[0]) }}');">
+    		    					<div class="img rounded d-flex align-items-end" style="background-image: url('{{ $imageUrl }}');">
     		    					</div>
                                     </a>
                                       <div class="text">
@@ -141,9 +145,13 @@
         </div>
         <div class="row d-flex">
             @foreach ($latestCars as $car)
+        @php
+    $images = json_decode($car->images, true);
+    $imageUrl = !empty($images) ? asset('storage/' . $images[0]) : asset('path-to-default-image.jpg');
+@endphp
             <div class="col-md-4 ftco-animate">
           	<div class="blog-entry car-card">
-              <a href="{{ route('cars.show', $car->id) }}" class="block-20" style="background-image: url('{{ asset('storage/' . json_decode($car->images)[0]) }}');">
+              <a href="{{ route('cars.show', $car->id) }}" class="block-20" style="background-image: url('{{ $imageUrl }}');">
               </a>
               <div class="text p-4">
                     <h3 class="heading mb-0"><a href="{{ route('cars.show', $car->id) }}">{{ $car->name }}</a></h3>

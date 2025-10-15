@@ -1,5 +1,8 @@
 @extends('layouts.sitemaster')
-
+@php
+    $images = json_decode($car->images, true);
+    $imageUrl = !empty($images) ? asset('storage/' . $images[0]) : asset('path-to-default-image.jpg');
+@endphp
 @push('styles')
 @endpush
 @section('content')
@@ -50,7 +53,7 @@
             <div class="col-md-6">
                 <div class="car-details">
                      <div class="img img-main rounded mb-3"
-                         style="background-image: url('{{ asset('storage/' . json_decode($car->images)[0]) }}');"></div>
+                         style="background-image: url('{{ $imageUrl }}');"></div>
                 </div>
             </div>
 
